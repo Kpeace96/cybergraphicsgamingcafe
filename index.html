@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyber Graphics Gaming Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a31;
+      --card2:#0f172a;
+      --text:#e5eefc;
+      --muted:#a9b7d0;
+      --brand:#7c5cff;
+      --brand2:#25c2a0;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 18px 60px rgba(0,0,0,.30);
+      --radius:22px;
+      --logo-w:64px;
+      --logo-h:64px;
+      --off:#6b7280;
+      --off2:#94a3b8;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,.20), transparent 26%),
+        radial-gradient(circle at top right, rgba(37,194,160,.16), transparent 22%),
+        linear-gradient(180deg, #060913 0%, #0b1220 100%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1160px, calc(100% - 32px)); margin:0 auto}
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(6,9,19,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo-img{
+      width:var(--logo-w);
+      height:var(--logo-h);
+      object-fit:cover;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+    .logo-fallback{
+      width:var(--logo-w);
+      height:var(--logo-h);
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      font-weight:900;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 20px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:700;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--brand),#9f7bff);
+      color:white;
+      box-shadow:0 12px 28px rgba(124,92,255,.22);
+    }
+    .btn-primary:hover{transform:translateY(-1px) scale(1.01)}
+    .btn-ghost{
+      border-color:var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+    }
+    .hero{
+      padding:64px 0 34px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before,.hero::after{
+      content:'';
+      position:absolute;
+      inset:auto;
+      pointer-events:none;
+      border-radius:50%;
+      filter:blur(10px);
+      opacity:.55;
+      animation:floaty 8s ease-in-out infinite;
+    }
+    .hero::before{
+      width:120px;
+      height:120px;
+      background:rgba(124,92,255,.22);
+      top:20px;
+      right:8%;
+    }
+    .hero::after{
+      width:90px;
+      height:90px;
+      background:rgba(37,194,160,.20);
+      bottom:10px;
+      left:3%;
+      animation-delay:1.5s;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:26px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+    .eyebrow{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:#cfe1ff;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      margin-bottom:18px;
+    }
+    h1{
+      font-size:clamp(40px, 6vw, 72px);
+      line-height:1.02;
+      margin:0 0 16px;
+      letter-spacing:-.04em;
+    }
+    .lead{
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+      max-width:54ch;
+      margin:0 0 28px;
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .panel{
+      background:rgba(16,26,49,.8);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::after{
+      content:'';
+      position:absolute;
+      right:18px;
+      top:12px;
+      font-size:44px;
+      opacity:.18;
+      animation:bounce 2.8s ease-in-out infinite;
+    }
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+    .stat{
+      padding:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:18px;
+      transition:transform .2s ease, border-color .2s ease;
+    }
+    .stat:hover{
+      transform:translateY(-3px);
+      border-color:rgba(124,92,255,.35);
+    }
+    .stat b{display:block;font-size:24px;margin-bottom:6px}
+    .section{padding:30px 0}
+    .section h2{
+      font-size:32px;
+      margin:0 0 10px;
+      letter-spacing:-.03em;
+    }
+    .section p.sub{
+      margin:0 0 22px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:18px;
+    }
+    .service{
+      padding:22px;
+      background:linear-gradient(180deg, rgba(16,26,49,.92), rgba(15,23,42,.92));
+      border:1px solid var(--line);
+      border-radius:22px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .service:hover{
+      transform:translateY(-5px);
+      border-color:rgba(37,194,160,.35);
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
+    }
+    .service .icon{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      background:rgba(124,92,255,.14);
+      border:1px solid rgba(124,92,255,.25);
+      animation:pop 2.8s ease-in-out infinite;
+    }
+    .price{font-size:28px;font-weight:800}
+    .muted{color:var(--muted);line-height:1.65}
+    .service ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .service .btn{margin-top:auto}
+    .service.offline{
+      opacity:.78;
+      background:linear-gradient(180deg, rgba(55,65,81,.90), rgba(31,41,55,.92));
+      border-color:rgba(148,163,184,.22);
+    }
+    .service.offline .icon{
+      background:rgba(148,163,184,.16);
+      border-color:rgba(148,163,184,.22);
+      animation:none;
+    }
+    .offline-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(148,163,184,.14);
+      border:1px solid rgba(148,163,184,.22);
+      color:#d1d5db;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.02em;
+      width:max-content;
+    }
+    .btn-disabled{
+      opacity:.55;
+      pointer-events:none;
+      filter:saturate(.75);
+      cursor:not-allowed;
+    }
+    .how{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .step{
+      padding:22px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      transition:transform .2s ease;
+    }
+    .step:hover{transform:translateY(-4px)}
+    .step-num{
+      display:inline-grid;
+      place-items:center;
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      color:#fff;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+    .testimonial{
+      padding:24px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .cta{
+      padding:28px;
+      border-radius:28px;
+      background:linear-gradient(135deg, rgba(124,92,255,.18), rgba(37,194,160,.14));
+      border:1px solid rgba(255,255,255,.10);
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      align-items:center;
+    }
+    .footer{
+      padding:28px 0 46px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    form{display:grid;gap:12px}
+    input, textarea, select{
+      width:100%;
+      padding:14px 15px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+      font:inherit;
+    }
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .order{
+      display:grid;
+      grid-template-columns:1fr .9fr;
+      gap:18px;
+      align-items:start;
+    }
+    .summary{
+      padding:22px;
+      border-radius:22px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+    }
+    .summary ul{
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .socials{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .socials a{
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+    }
+    .comment-card{
+      padding:20px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      transition:transform .2s ease;
+    }
+    .comment-card:hover{transform:translateY(-3px)}
+    .comment-meta{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:8px;
+    }
+    .comment-list{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) rotate(0deg)}
+      50%{transform:translateY(-10px) rotate(8deg)}
+    }
+    @keyframes bounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+    @keyframes pop{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.06)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+    }
+    @media (max-width: 1120px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 980px){
+      .hero-grid,.how,.order{grid-template-columns:1fr}
+      .cta{flex-direction:column;align-items:flex-start}
+      .cards{grid-template-columns:1fr 1fr}
+      .nav-inner{justify-content:center}
+    }
+    @media (max-width: 640px){
+      .cards,.grid-2,.stat-grid,.hero-actions{grid-template-columns:1fr}
+      .cards,.how{grid-template-columns:1fr}
+      .nav-links{justify-content:center}
+      .wrap{width:min(1160px, calc(100% - 20px))}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="logo">
+        <img class="logo-img" src="logo.jpg" alt="Cyber Graphics Gaming Cafe logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+        <div class="logo-fallback" style="display:none;">CG</div>
+        <div>Cyber Graphics Gaming Cafe</div>
+      </div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#comments">Comments</a>
+        <a href="#order">Order</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-primary" href="#order">Book Now</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Gaming · Printing · Internet · Design · Business Registration · South Africa</div>
+          <h1>Your local gaming cafe, design studio, and print hub.</h1>
+          <p class="lead">Book gaming time, print services, branding work, business registration, and online support in one place. Fast service, easy payments, and direct contact on WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#services">View Services</a>
+            <a class="btn btn-ghost" href="#order">Place an Order</a>
+          </div>
+        </div>
+        <div class="panel hero-card">
+          <h3 style="margin:0 0 8px">Why customers choose us</h3>
+          <p class="muted" style="margin-top:0">A complete site with prices, bookings, social links, and a working contact flow makes it easy to turn visitors into customers.</p>
+          <div class="stat-grid">
+            <div class="stat"><b>5</b><span class="muted">Main services</span></div>
+            <div class="stat"><b>24/7</b><span class="muted">Online enquiries</span></div>
+            <div class="stat"><b>SA</b><span class="muted">Local focus</span></div>
+            <div class="stat"><b>1</b><span class="muted">Checkout flow</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <h2>Services</h2>
+        <p class="sub">The services below are now in offline mode until further notice.</p>
+        <div class="cards">
+          <article class="service offline">
+            <div class="offline-badge">OFFLINE MODE</div>
+            <div class="icon"></div>
+            <h3>Gaming Sessions</h3>
+            <div class="price">R45/hr</div>
+            <p class="muted">Temporarily unavailable until further notice.</p>
+            <ul>
+              <li>Single or group bookings</li>
+              <li>LAN-ready setup</li>
+              <li>Refreshments available</li>
+            </ul>
+            <a class="btn btn-primary btn-disabled" href="#">Offline</a>
+          </article>
+
+          <article class="service offline">
+            <div class="offline-badge">OFFLINE MODE</div>
+            <div class="icon"></div>
+            <h3>Printing</h3>
+            <div class="price">From R5</div>
+            <p class="muted">Temporarily unavailable until further notice.</p>
+            <ul>
+              <li>A4 printing</li>
+              <li>Scanning and copying</li>
+              <li>Fast turnaround</li>
+            </ul>
+            <a class="btn btn-primary btn-disabled" href="#">Offline</a>
+          </article>
+
+          <article class="service">
+            <div class="icon">✦</div>
+            <h3>Graphic Design</h3>
+            <div class="price">From R250</div>
+            <p class="muted">Logos, posters, flyers, and social media graphics.</p>
+            <ul>
+              <li>Custom designs</li>
+              <li>Editable source files</li>
+              <li>Brand matching</li>
+            </ul>
+            <a class="btn btn-primary" href="#order">Order now</a>
+          </article>
+
+          <article class="service">
+            <div class="icon">⌂</div>
+            <h3>Website Setup</h3>
+            <div class="price">R1,000 - R2,500</div>
+            <p class="muted">Simple business websites that are mobile-friendly and ready for hosting.</p>
+            <ul>
+              <li>One-page or multi-page</li>
+              <li>Basic SEO</li>
+              <li>Contact forms</li>
+            </ul>
+            <a class="btn btn-primary" href="#order">Order now</a>
+          </article>
+
+          <article class="service">
+            <div class="icon"></div>
+            <h3>Business Registration</h3>
+            <div class="price">R750</div>
+            <p class="muted">Help getting your business set up and ready to operate.</p>
+            <ul>
+              <li>Registration guidance</li>
+              <li>Business details setup</li>
+              <li>Support with documents</li>
+            </ul>
+            <a class="btn btn-primary" href="#order">Order now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="sub">A simple flow helps customers finish faster.</p>
+        <div class="how">
+          <div class="step"><div class="step-num">1</div><h3>Choose service</h3><p class="muted">Select from the available online services.</p></div>
+          <div class="step"><div class="step-num">2</div><h3>Send your details</h3><p class="muted">Share the brief, documents, or business information you need.</p></div>
+          <div class="step"><div class="step-num">3</div><h3>Pay and confirm</h3><p class="muted">Complete payment, then we confirm your order.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="wrap">
+        <h2>Reviews</h2>
+        <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+          <div class="testimonial"><p>“Great gaming setup and friendly service.”</p><strong>— Naledi</strong></div>
+          <div class="testimonial"><p>“My flyer was done quickly and looked professional.”</p><strong>— Thabo</strong></div>
+          <div class="testimonial"><p>“The website and social links made it easy to contact them.”</p><strong>— Ayesha</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comments">
+      <div class="wrap">
+        <h2>Live Comments</h2>
+        <p class="sub">Leave a comment — it appears instantly and saves in your browser.</p>
+        <div class="panel" style="padding:24px; margin-bottom:20px;">
+          <form id="commentForm">
+            <div class="grid-2">
+              <input type="text" id="commentName" placeholder="Your name" required>
+            </div>
+            <textarea id="commentText" placeholder="Write your comment..." required></textarea>
+            <button class="btn btn-primary" type="submit">Post Comment</button>
+          </form>
+        </div>
+        <div id="commentsList" class="comment-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="order">
+      <div class="wrap order">
+        <div class="panel" style="padding:24px">
+          <h2 style="margin-top:0">Place your order</h2>
+          <p class="sub">Fill in your details and send your order straight to our WhatsApp.</p>
+          <form id="orderForm">
+            <div class="grid-2">
+              <input type="text" name="name" placeholder="Full name" required>
+              <input type="email" name="email" placeholder="Email address" required>
+            </div>
+            <div class="grid-2">
+              <select name="service" required>
+                <option value="">Select service</option>
+                <option>Gaming Sessions</option>
+                <option>Printing</option>
+                <option>Graphic Design</option>
+                <option>Website Setup</option>
+                <option>Business Registration</option>
+              </select>
+              <input type="text" name="budget" placeholder="Budget or booking time">
+            </div>
+            <textarea name="details" placeholder="Tell us what you need" required></textarea>
+            <button class="btn btn-primary" type="submit">Send order via WhatsApp</button>
+          </form>
+        </div>
+
+        <aside class="summary" id="contact">
+          <h3 style="margin-top:0">Contact & social</h3>
+          <ul>
+            <li>WhatsApp: +27 81 433 3648</li>
+            <li>Facebook: Cyber Graphics Gaming Cafe</li>
+            <li>Instagram: @cybergraphicsgamingcafe</li>
+          </ul>
+          <div class="socials">
+            <a href="https://wa.me/27814333648" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://facebook.com/cyberGgamingCafe" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/cyberGgamingCafe/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap cta">
+        <div>
+          <h2 style="margin:0 0 8px">Branding</h2>
+          <p class="sub" style="margin:0; max-width:60ch">This page is now branded for Cyber Graphics Gaming Cafe and includes social links and a working contact flow.</p>
+       
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">© 2026 Cyber Graphics Gaming Cafe. Built for South Africa.</div>
+  </footer>
+
+  <script>
+    // --- Order Form -> WhatsApp ---
+    const form = document.getElementById('orderForm');
+    const waNumber = '27814333648';
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const msg = `Hi, I would like to order:%0AName: ${fd.get('name')}%0AEmail: ${fd.get('email')}%0AService: ${fd.get('service')}%0ABudget/Time: ${fd.get('budget') || '-'}%0ADetails: ${fd.get('details')}`;
+      const url = `https://wa.me/${27814333648}?text=${msg}`;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    // --- Live Comment Section ---
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+    const STORAGE_KEY = 'cgc_comments';
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function loadComments() {
+      const comments = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      commentsList.innerHTML = '';
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<p class="muted" style="text-align:center;">No comments yet. Be the first to share your thoughts!</p>';
+        return;
+      }
+      comments.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-card';
+        div.innerHTML = `
+          <p style="margin:0 0 6px;">"${escapeHtml(c.text)}"</p>
+          <strong>— ${escapeHtml(c.name)}</strong>
+          <div class="comment-meta">${escapeHtml(c.date)}</div>
+        `;
+        commentsList.appendChild(div);
+      });
+    }
+
+    commentForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('commentName').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      if (!name || !text) return;
+
+      const comments = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      comments.unshift({
+        name,
+        text,
+        date: new Date().toLocaleString('en-ZA', { dateStyle: 'medium', timeStyle: 'short' })
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+      commentForm.reset();
+      loadComments();
+    });
+
+    loadComments();
+  </script>
+</body>
+</html>
