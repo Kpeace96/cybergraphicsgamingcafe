@@ -1,0 +1,126 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&amp;family=Space+Mono:wght@400;700&amp;family=Space+Grotesk:wght@400;500&amp;display=swap');
+
+      .eyebrow{
+        font-family:'Space Grotesk', sans-serif;
+        font-size:15px;
+        font-weight:500;
+        letter-spacing:0.32em;
+        fill:#8fa3c4;
+      }
+      .lead-word{
+        font-family:'Space Grotesk', sans-serif;
+        font-size:32px;
+        font-weight:400;
+        fill:#9fb0cc;
+      }
+      .grotesk-line{
+        font-family:'Space Grotesk', sans-serif;
+        font-size:50px;
+        font-weight:500;
+        fill:#eaf6f0;
+      }
+      .serif{
+        font-family:'Fraunces', serif;
+        font-style:italic;
+        font-weight:600;
+        font-size:96px;
+        fill:url(#serifGrad);
+      }
+      .connector{
+        font-family:'Space Mono', monospace;
+        font-size:24px;
+        fill:#66768f;
+      }
+      .mono{
+        font-family:'Space Mono', monospace;
+        font-weight:700;
+        font-size:58px;
+        fill:#eaf6f0;
+      }
+      .mono-accent{
+        font-family:'Space Mono', monospace;
+        font-weight:700;
+        font-size:58px;
+        fill:#25c2a0;
+      }
+      .tick{
+        font-family:'Space Mono', monospace;
+        font-weight:700;
+        font-size:58px;
+        fill:#7c5cff;
+        animation: blink 1.4s steps(1) infinite;
+      }
+      @keyframes blink{
+        0%,49%{opacity:1}
+        50%,100%{opacity:0}
+      }
+      @media (prefers-reduced-motion: reduce){
+        .tick{animation:none}
+      }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a15"/>
+      <stop offset="100%" stop-color="#0b1220"/>
+    </linearGradient>
+
+    <radialGradient id="glowPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7c5cff" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowTeal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#25c2a0" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#25c2a0" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="serifGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cdd9f5"/>
+    </linearGradient>
+
+    <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c5cff"/>
+      <stop offset="100%" stop-color="#25c2a0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  <circle cx="1040" cy="90" r="220" fill="url(#glowPurple)"/>
+  <circle cx="90" cy="600" r="200" fill="url(#glowTeal)"/>
+
+  <!-- faint grid, nods to "cyber" without shouting it -->
+  <g stroke="#ffffff" stroke-opacity="0.035" stroke-width="1">
+    <line x1="0" y1="168" x2="1200" y2="168"/>
+    <line x1="0" y1="507" x2="1200" y2="507"/>
+    <line x1="400" y1="0" x2="400" y2="675"/>
+    <line x1="800" y1="0" x2="800" y2="675"/>
+  </g>
+
+  <!-- eyebrow -->
+  <text x="90" y="118" class="eyebrow">CYBER GRAPHICS GAMING CAFE — SOUTH AFRICA</text>
+
+  <!-- headline, four registers of type carrying four ideas: -->
+  <!-- "Your Local" = quiet grotesk (approachable) -->
+  <!-- "Internet Cafe, Gaming," = plain grotesk, bright (the walk-in, social side) -->
+  <!-- "Design Studio" = italic serif (craft) -->
+  <!-- "Website Creation." = bold mono (build/code), with a blinking cursor -->
+  <text x="90" y="200" class="lead-word">Your Local</text>
+  <text x="90" y="260" class="grotesk-line">Internet Cafe, Gaming,</text>
+  <text x="90" y="370" class="serif">Design Studio</text>
+
+  <path d="M 90 396 C 200 414, 320 414, 440 396" stroke="url(#strokeGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <text x="90" y="470" class="connector">and</text>
+  <text x="155" y="478" class="mono">Website </text>
+  <text x="405" y="478" class="mono-accent">Creation</text>
+  <text x="605" y="478" class="mono">.</text>
+  <text x="632" y="478" class="tick">_</text>
+
+  <!-- footer mark -->
+  <text x="90" y="600" class="connector" fill="#5a6a86">est. Cyber Graphics Gaming Cafe — cafe · gaming · design · web</text>
+</svg>
